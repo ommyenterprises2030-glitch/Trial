@@ -1,0 +1,536 @@
+<!DOCTYPE html>
+<html lang="sw">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Duka Langu — Duka la Mahitaji ya Nyumbani</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
+<style>
+  :root{
+    --bg:#12132a;
+    --panel:#1c1d3f;
+    --panel-2:#242651;
+    --purple:#8b7cf0;
+    --gold:#f0a93a;
+    --coral:#e85d4e;
+    --text:#f5f2ea;
+    --muted:#a6a4cc;
+    --line:#33355e;
+  }
+  body{
+    background:var(--bg);
+    color:var(--text);
+    font-family:'Inter',sans-serif;
+  }
+  h1,h2,h3,.font-display{font-family:'Fraunces',serif;font-weight:600;}
+  a{color:inherit;}
+  .eyebrow{
+    font-family:'JetBrains Mono',monospace;
+    color:var(--gold);
+    font-size:0.8rem;
+    letter-spacing:0.08em;
+    text-transform:uppercase;
+  }
+  .beadwork{
+    height:10px;width:100%;
+    background-image:
+      radial-gradient(circle, var(--gold) 2.5px, transparent 2.6px),
+      radial-gradient(circle, var(--coral) 2.5px, transparent 2.6px),
+      radial-gradient(circle, var(--purple) 2.5px, transparent 2.6px);
+    background-size:24px 10px, 24px 10px, 24px 10px;
+    background-position:0 0, 8px 0, 16px 0;
+  }
+
+  /* Navbar */
+  .navbar{
+    background:rgba(18,19,42,0.9) !important;
+    backdrop-filter:blur(8px);
+    border-bottom:1px solid var(--line);
+  }
+  .navbar-brand{font-family:'Fraunces',serif;font-weight:700;color:var(--text) !important;}
+  .nav-link{color:var(--muted) !important;font-weight:500;}
+  .nav-link:hover{color:var(--gold) !important;}
+  .btn-coral{background:var(--coral);border-color:var(--coral);color:#12132a;font-weight:700;}
+  .btn-coral:hover{background:var(--gold);border-color:var(--gold);color:#12132a;}
+  .btn-outline-light:hover{color:#12132a;}
+
+  /* Sections */
+  section{padding:88px 0;}
+  .bg-panel{background:var(--panel);border-top:1px solid var(--line);border-bottom:1px solid var(--line);}
+
+  .hero-badge{
+    width:260px;height:260px;border-radius:50%;
+    background:radial-gradient(circle at 30% 30%, var(--panel-2), var(--panel));
+    border:1px solid var(--line);
+    display:flex;align-items:center;justify-content:center;
+    font-size:5rem;
+    margin:0 auto;
+  }
+
+  .stat-card{
+    background:var(--panel-2);
+    border:1px solid var(--line);
+    border-radius:12px;
+    text-align:center;
+    padding:20px 10px;
+  }
+  .stat-num{font-family:'Fraunces',serif;font-size:1.8rem;color:var(--gold);font-weight:700;}
+  .stat-label{font-size:0.78rem;color:var(--muted);}
+
+  .product-card{
+    background:var(--panel);
+    border:1px solid var(--line);
+    border-radius:12px;
+    text-align:center;
+    padding:20px 14px;
+    height:100%;
+    transition:transform .12s ease, border-color .12s ease;
+  }
+  .product-card:hover{transform:translateY(-3px);border-color:var(--purple);}
+  .product-card img{width:64px;height:64px;object-fit:cover;border-radius:8px;margin:0 auto 10px;display:block;}
+  .product-card .p-icon{font-size:2.4rem;margin-bottom:8px;}
+  .product-card .p-name{font-weight:600;font-size:0.92rem;}
+  .product-card .p-price{font-family:'JetBrains Mono',monospace;color:var(--gold);font-size:0.85rem;}
+
+  .contact-icon{
+    width:42px;height:42px;flex-shrink:0;
+    border-radius:10px;
+    background:var(--panel-2);
+    display:flex;align-items:center;justify-content:center;
+    font-size:1.15rem;
+    color:var(--gold);
+  }
+  .map-wrap{border-radius:14px;overflow:hidden;border:1px solid var(--line);min-height:280px;}
+  .map-wrap iframe{width:100%;height:100%;min-height:280px;border:0;display:block;}
+
+  /* Product carousel */
+  #productCarousel{
+    border-bottom:1px solid var(--line);
+  }
+  #productCarousel .carousel-item{
+    height:420px;
+    background:linear-gradient(135deg, var(--panel-2), var(--panel));
+  }
+  #productCarousel .slide-media{
+    width:100%;height:100%;
+    display:flex;align-items:center;justify-content:center;
+    position:relative;
+  }
+  #productCarousel .slide-media img{
+    width:100%;height:100%;object-fit:cover;
+    filter:brightness(0.55);
+  }
+  #productCarousel .slide-icon{
+    font-size:7rem;
+    opacity:0.9;
+  }
+  #productCarousel .slide-caption{
+    position:absolute;
+    left:0;right:0;bottom:0;
+    padding:32px 8vw 40px;
+    background:linear-gradient(to top, rgba(10,11,30,0.92), transparent);
+    text-align:left;
+  }
+  #productCarousel .slide-caption .eyebrow{margin-bottom:6px;display:block;}
+  #productCarousel .slide-caption h3{font-size:1.9rem;margin-bottom:6px;}
+  #productCarousel .slide-caption .price{
+    font-family:'JetBrains Mono',monospace;
+    color:var(--gold);
+    font-size:1.15rem;
+    font-weight:600;
+  }
+  #productCarousel .carousel-control-prev,
+  #productCarousel .carousel-control-next{width:6%;opacity:0.8;}
+  #productCarousel .carousel-indicators{margin-bottom:0.5rem;}
+  #productCarousel .carousel-indicators [data-bs-target]{
+    background-color:var(--gold);
+    width:8px;height:8px;border-radius:50%;
+  }
+  @media (max-width:700px){
+    #productCarousel .carousel-item{height:320px;}
+    #productCarousel .slide-icon{font-size:4.5rem;}
+    #productCarousel .slide-caption h3{font-size:1.4rem;}
+  }
+  @media (max-width:576px){
+    section{padding:56px 0;}
+    .display-5{font-size:2rem;}
+    .stat-card .stat-num{font-size:1.4rem;}
+    #productCarousel .carousel-item{height:260px;}
+    #productCarousel .slide-caption{padding:20px 6vw 26px;}
+    .product-card{padding:14px 10px;}
+    .contact-icon{width:36px;height:36px;font-size:1rem;}
+  }
+
+  footer{border-top:1px solid var(--line);color:var(--muted);font-size:0.85rem;}
+  em{color:var(--muted);font-style:normal;font-size:0.8rem;}
+
+  /* Cart offcanvas */
+  .offcanvas{
+    background:var(--panel) !important;
+    color:var(--text) !important;
+    border-left:1px solid var(--line);
+  }
+  .cart-row{
+    display:flex;align-items:center;gap:10px;
+    padding:10px 0;
+    border-bottom:1px solid var(--line);
+  }
+  .cart-row img, .cart-row .cr-icon{
+    width:44px;height:44px;border-radius:8px;object-fit:cover;
+    flex-shrink:0;display:flex;align-items:center;justify-content:center;
+    background:var(--panel-2);font-size:1.4rem;
+  }
+  .cart-row-info{flex:1;min-width:0;}
+  .cart-row-name{font-size:0.88rem;font-weight:600;}
+  .cart-row-price{font-family:'JetBrains Mono',monospace;font-size:0.78rem;color:var(--muted);}
+  .cart-qty-ctrl{display:flex;align-items:center;gap:6px;}
+  .cart-qty-btn{
+    width:24px;height:24px;border-radius:6px;
+    border:1px solid var(--line);background:var(--panel-2);color:var(--text);
+    cursor:pointer;font-size:0.9rem;line-height:1;
+  }
+  .cart-empty{color:var(--muted);font-size:0.88rem;text-align:center;padding:30px 10px;font-style:italic;}
+</style>
+</head>
+<body>
+
+<nav class="navbar navbar-expand-lg sticky-top">
+  <div class="container">
+    <a class="navbar-brand" href="#">Duka Langu</a>
+    <div class="d-flex align-items-center gap-2 order-lg-3">
+      <button class="btn btn-outline-light btn-sm rounded-pill px-3 position-relative" type="button" data-bs-toggle="offcanvas" data-bs-target="#cartOffcanvas">
+        <i class="bi bi-cart3"></i>
+        <span class="visually-hidden">Kikapu</span>
+        <span id="cartCount" class="position-absolute top-0 start-100 translate-middle badge rounded-pill" style="background:var(--gold);color:#12132a;display:none;">0</span>
+      </button>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navMenu">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+    </div>
+    <div class="collapse navbar-collapse" id="navMenu">
+      <ul class="navbar-nav ms-auto align-items-lg-center gap-lg-4">
+        <li class="nav-item"><a class="nav-link" href="#kuhusu">Kuhusu Sisi</a></li>
+        <li class="nav-item"><a class="nav-link" href="#bidhaa">Bidhaa</a></li>
+        <li class="nav-item"><a class="nav-link" href="#mawasiliano">Mawasiliano</a></li>
+        <li class="nav-item"><a class="nav-link" href="#eneo">Eneo</a></li>
+        <li class="nav-item mt-2 mt-lg-0">
+          <a class="btn btn-coral btn-sm rounded-pill px-3" href="#mawasiliano">Wasiliana Nasi</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<div id="productCarousel" class="carousel slide" data-bs-ride="carousel">
+  <div class="carousel-indicators" id="carouselIndicators"></div>
+  <div class="carousel-inner" id="carouselInner"></div>
+  <button class="carousel-control-prev" type="button" data-bs-target="#productCarousel" data-bs-slide="prev">
+    <span class="carousel-control-prev-icon"></span>
+  </button>
+  <button class="carousel-control-next" type="button" data-bs-target="#productCarousel" data-bs-slide="next">
+    <span class="carousel-control-next-icon"></span>
+  </button>
+</div>
+
+<section class="pt-5">
+  <div class="container">
+    <div class="row justify-content-center text-center">
+      <div class="col-lg-8">
+        <p class="eyebrow mb-2">Karibu Duka Langu</p>
+        <h1 class="display-5 mb-3">Mahitaji yako ya nyumbani, karibu nawe.</h1>
+        <p class="mb-4 mx-auto" style="color:#e4e2f5;max-width:48ch;">Tunauza vyakula na bidhaa za nyumbani kwa bei nzuri na huduma ya haraka. Kuanzia sukari na mchele hadi mafuta na sabuni — tunahakikisha mahitaji yako ya kila siku yanapatikana chini ya paa moja.</p>
+        <div class="d-flex gap-3 flex-wrap justify-content-center">
+          <a class="btn btn-coral rounded-pill px-4 py-2 fw-bold" href="#bidhaa">Angalia Bidhaa</a>
+          <a class="btn btn-outline-light rounded-pill px-4 py-2 fw-bold" href="#mawasiliano">Wasiliana Nasi</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="beadwork"></div>
+
+<section class="bg-panel" id="kuhusu">
+  <div class="container">
+    <div class="row align-items-center gy-5">
+      <div class="col-lg-7">
+        <p class="eyebrow mb-2">Kuhusu Sisi</p>
+        <h2 class="mb-3">Duka la mtaani unaloweza kuliamini</h2>
+        <p style="color:#e4e2f5;max-width:52ch;">Duka Langu ni duka la mahitaji ya kila siku linalohudumia familia na wafanyabiashara wadogo katika eneo letu. Tumejikita katika kutoa bidhaa bora, bei nafuu, na huduma ya haraka kwa wateja wetu.</p>
+        <p style="color:#e4e2f5;max-width:52ch;">Kila siku tunahakikisha rafu zetu zina bidhaa mpya — kutoka vyakula vya msingi hadi bidhaa za usafi wa nyumbani.</p>
+      </div>
+      <div class="col-lg-5">
+        <div class="row g-3">
+          <div class="col-4"><div class="stat-card"><div class="stat-num">12+</div><div class="stat-label">Aina za bidhaa</div></div></div>
+          <div class="col-4"><div class="stat-card"><div class="stat-num">6</div><div class="stat-label">Siku kwa wiki</div></div></div>
+          <div class="col-4"><div class="stat-card"><div class="stat-num">100%</div><div class="stat-label">Huduma ya haraka</div></div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="bidhaa">
+  <div class="container">
+    <div class="text-center mb-5">
+      <p class="eyebrow mb-2">Bidhaa Zetu</p>
+      <h2>Baadhi ya bidhaa tunazouza</h2>
+      <p class="mx-auto" style="color:var(--muted);max-width:50ch;">Bei na upatikanaji hubadilika mara kwa mara — tazama orodha ya sasa hapa chini.</p>
+    </div>
+    <div class="row g-3" id="productGrid"></div>
+    <p class="text-center mt-4" id="productsStatus" style="color:var(--muted);font-family:'JetBrains Mono',monospace;font-size:0.8rem;"></p>
+  </div>
+</section>
+
+<div class="beadwork"></div>
+
+<section class="bg-panel" id="mawasiliano">
+  <div class="container">
+    <div class="row gy-5">
+      <div class="col-lg-6">
+        <p class="eyebrow mb-2">Mawasiliano</p>
+        <h2 class="mb-4">Tuko tayari kukusaidia</h2>
+
+        <div class="d-flex gap-3 mb-4">
+          <div class="contact-icon"><i class="bi bi-telephone-fill"></i></div>
+          <div>
+            <h4 class="h6 mb-1">Simu / WhatsApp</h4>
+            <p class="mb-0"><a href="tel:+255700000000">+255 700 000 000</a> <em>(badilisha na namba yako)</em></p>
+          </div>
+        </div>
+
+        <div class="d-flex gap-3 mb-4">
+          <div class="contact-icon"><i class="bi bi-envelope-fill"></i></div>
+          <div>
+            <h4 class="h6 mb-1">Barua pepe</h4>
+            <p class="mb-0"><a href="mailto:info@dukalangu.co.tz">info@dukalangu.co.tz</a> <em>(badilisha na barua pepe yako)</em></p>
+          </div>
+        </div>
+
+        <div class="d-flex gap-3">
+          <div class="contact-icon"><i class="bi bi-clock-fill"></i></div>
+          <div>
+            <h4 class="h6 mb-1">Muda wa Kufungua</h4>
+            <p class="mb-0" style="color:var(--muted);">Jumatatu – Jumamosi: 7:30 Asubuhi – 8:00 Jioni</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-lg-6" id="eneo">
+        <p class="eyebrow mb-2">Eneo Letu</p>
+        <h2 class="mb-3">Tembelea Duka Letu</h2>
+        <div class="map-wrap">
+          <iframe
+            src="https://www.google.com/maps?q=Dar+es+Salaam,+Tanzania&output=embed"
+            loading="lazy"
+            referrerpolicy="no-referrer-when-downgrade"
+            title="Ramani ya eneo la Duka Langu">
+          </iframe>
+        </div>
+        <p class="mt-2" style="color:var(--muted);font-size:0.85rem;">Barabara ya Mfano, Dar es Salaam <em>(badilisha na anwani yako halisi)</em></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer class="py-4 text-center">
+  &copy; <span id="year"></span> Duka Langu. Haki zote zimehifadhiwa.
+</footer>
+
+<div class="offcanvas offcanvas-end" tabindex="-1" id="cartOffcanvas">
+  <div class="offcanvas-header">
+    <h5 class="offcanvas-title font-display">Kikapu Chako</h5>
+    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas"></button>
+  </div>
+  <div class="offcanvas-body d-flex flex-column">
+    <div id="cartItemsList" class="flex-grow-1"></div>
+    <div class="border-top pt-3 mt-2" style="border-color:var(--line) !important;">
+      <div class="d-flex justify-content-between mb-3">
+        <strong>Jumla</strong>
+        <strong id="cartTotal" style="color:var(--gold);font-family:'JetBrains Mono',monospace;">TSh 0</strong>
+      </div>
+      <button class="btn btn-coral w-100 rounded-pill fw-bold mb-2" id="checkoutBtn">Agiza kupitia WhatsApp</button>
+      <button class="btn btn-outline-light w-100 rounded-pill btn-sm" id="clearCartBtn">Futa Kikapu</button>
+    </div>
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+document.getElementById('year').textContent = new Date().getFullYear();
+
+// Reuse the same Apps Script Web App URL as the POS system so both stay in sync.
+const SHEET_API_URL = 'https://script.google.com/macros/s/AKfycbw8YoxgUl7L0SgAXg_qn0R9kKcXh6nJpwkazgdgtRkfBaslpcI13-xAXzJ0Uu8fkFD3GA/exec';
+
+const FALLBACK_PRODUCTS = [
+  {id:'sukari', name:'Sukari (kg)', price:2500, icon:'🧂'},
+  {id:'mchele', name:'Mchele (kg)', price:3000, icon:'🍚'},
+  {id:'maziwa', name:'Maziwa', price:1500, icon:'🥛'},
+  {id:'mkate', name:'Mkate', price:1200, icon:'🍞'},
+  {id:'chai', name:'Chai', price:800, icon:'🍵'},
+  {id:'sabuni', name:'Sabuni', price:1000, icon:'🧼'},
+];
+
+function fmt(n){ return 'TSh ' + Math.round(n).toLocaleString('en-US'); }
+
+// === Kikapu (Cart) ===
+const WHATSAPP_NUMBER = '255700000000'; // badilisha na namba yako halisi (bila +)
+let cart = {};
+
+function addToCart(p){
+  if(cart[p.id]) cart[p.id].qty += 1;
+  else cart[p.id] = {id:p.id, name:p.name, price:p.price, icon:p.icon, image:p.image, qty:1};
+  renderCartPanel();
+}
+
+function changeCartQty(id, delta){
+  if(!cart[id]) return;
+  cart[id].qty += delta;
+  if(cart[id].qty <= 0) delete cart[id];
+  renderCartPanel();
+}
+
+function removeFromCart(id){
+  delete cart[id];
+  renderCartPanel();
+}
+
+function renderCartPanel(){
+  const list = document.getElementById('cartItemsList');
+  const totalEl = document.getElementById('cartTotal');
+  const countEl = document.getElementById('cartCount');
+  const items = Object.values(cart);
+
+  list.innerHTML = '';
+  if(!items.length){
+    list.innerHTML = '<p class="cart-empty">Kikapu chako bado ni tupu. Ongeza bidhaa kutoka sehemu ya Bidhaa Zetu.</p>';
+  } else {
+    items.forEach(item => {
+      const row = document.createElement('div');
+      row.className = 'cart-row';
+      const media = item.image
+        ? `<img src="${item.image}" alt="${item.name}">`
+        : `<div class="cr-icon">${item.icon || '🛒'}</div>`;
+      row.innerHTML = `
+        ${media}
+        <div class="cart-row-info">
+          <div class="cart-row-name">${item.name}</div>
+          <div class="cart-row-price">${fmt(item.price)} kila moja</div>
+        </div>
+        <div class="cart-qty-ctrl">
+          <button class="cart-qty-btn" data-act="dec">−</button>
+          <span style="font-family:'JetBrains Mono',monospace;font-size:0.85rem;min-width:16px;text-align:center;">${item.qty}</span>
+          <button class="cart-qty-btn" data-act="inc">+</button>
+        </div>
+        <button class="btn btn-sm btn-link text-danger p-0 ms-1" data-act="rm" style="text-decoration:none;">✕</button>
+      `;
+      row.querySelector('[data-act="inc"]').addEventListener('click', () => changeCartQty(item.id, 1));
+      row.querySelector('[data-act="dec"]').addEventListener('click', () => changeCartQty(item.id, -1));
+      row.querySelector('[data-act="rm"]').addEventListener('click', () => removeFromCart(item.id));
+      list.appendChild(row);
+    });
+  }
+
+  const total = items.reduce((sum, i) => sum + i.price * i.qty, 0);
+  const count = items.reduce((sum, i) => sum + i.qty, 0);
+  totalEl.textContent = fmt(total);
+  countEl.textContent = count;
+  countEl.style.display = count > 0 ? 'inline-block' : 'none';
+}
+
+document.getElementById('clearCartBtn').addEventListener('click', () => {
+  cart = {};
+  renderCartPanel();
+});
+
+document.getElementById('checkoutBtn').addEventListener('click', () => {
+  const items = Object.values(cart);
+  if(!items.length){
+    alert('Kikapu chako bado ni tupu.');
+    return;
+  }
+  const lines = items.map(i => `• ${i.name} x${i.qty} — ${fmt(i.price * i.qty)}`);
+  const total = items.reduce((sum, i) => sum + i.price * i.qty, 0);
+  const message = `Habari Duka Langu, ningependa kuagiza:\n\n${lines.join('\n')}\n\nJumla: ${fmt(total)}`;
+  const url = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`;
+  window.open(url, '_blank');
+});
+
+function renderCarousel(products){
+  const inner = document.getElementById('carouselInner');
+  const indicators = document.getElementById('carouselIndicators');
+  inner.innerHTML = '';
+  indicators.innerHTML = '';
+
+  products.forEach((p, idx) => {
+    const media = p.image
+      ? `<img src="${p.image}" alt="${p.name}" onerror="this.replaceWith(Object.assign(document.createElement('div'),{className:'slide-icon',textContent:'${(p.icon||'🛒').replace(/'/g, "")}'}))">`
+      : `<div class="slide-icon">${p.icon || '🛒'}</div>`;
+
+    const item = document.createElement('div');
+    item.className = 'carousel-item' + (idx === 0 ? ' active' : '');
+    item.innerHTML = `
+      <div class="slide-media">
+        ${media}
+        <div class="slide-caption">
+          <span class="eyebrow">Bidhaa ya Wiki</span>
+          <h3>${p.name}</h3>
+          <div class="price">${fmt(p.price)}</div>
+        </div>
+      </div>`;
+    inner.appendChild(item);
+
+    const btn = document.createElement('button');
+    btn.type = 'button';
+    btn.setAttribute('data-bs-target', '#productCarousel');
+    btn.setAttribute('data-bs-slide-to', idx);
+    if(idx === 0){ btn.className = 'active'; btn.setAttribute('aria-current', 'true'); }
+    indicators.appendChild(btn);
+  });
+}
+
+function renderProducts(products){
+  const grid = document.getElementById('productGrid');
+  grid.innerHTML = '';
+  products.forEach(p => {
+    const col = document.createElement('div');
+    col.className = 'col-6 col-md-4 col-lg-2';
+    const media = p.image
+      ? `<img src="${p.image}" alt="${p.name}" loading="lazy" onerror="this.outerHTML='<div class=&quot;p-icon&quot;>${p.icon||'🛒'}</div>'">`
+      : `<div class="p-icon">${p.icon || '🛒'}</div>`;
+    col.innerHTML = `<div class="product-card">${media}<div class="p-name">${p.name}</div><div class="p-price">${fmt(p.price)}</div><button class="btn btn-sm btn-coral rounded-pill w-100 mt-2 add-cart-btn">Ongeza Kikapuni</button></div>`;
+    col.querySelector('.add-cart-btn').addEventListener('click', () => addToCart(p));
+    grid.appendChild(col);
+  });
+}
+
+async function loadProducts(){
+  const statusEl = document.getElementById('productsStatus');
+  renderProducts(FALLBACK_PRODUCTS);
+  renderCarousel(FALLBACK_PRODUCTS);
+  if(!SHEET_API_URL || SHEET_API_URL.includes('PASTE_YOUR_WEB_APP_URL_HERE')){
+    return;
+  }
+  try{
+    const res = await fetch(SHEET_API_URL + '?action=products');
+    const data = await res.json();
+    if(data.products && data.products.length){
+      const mapped = data.products.map(p => ({
+        id:p.id, name:p.name, price:Number(p.price), icon:p.icon, image:p.image
+      }));
+      renderProducts(mapped);
+      renderCarousel(mapped);
+    }
+  }catch(err){
+    statusEl.textContent = '';
+  }
+}
+
+loadProducts();
+renderCartPanel();
+</script>
+</body>
+</html>
