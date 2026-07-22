@@ -1,0 +1,25 @@
+{
+  "background_color": "#ffffff",
+  "dir": "ltr",
+  "display": "standalone",
+  "name": "Duka POS",
+  "orientation": "any",
+  "scope": "/",
+  "short_name": "Duka POS",
+  "start_url": "/",
+  "theme_color": "#12132a",
+  "icons": [
+    {
+      "src": "https://ommyenterprises2030-glitch.github.io/Trial/icons/icon-192.png",
+      "isSquare": false,
+      "isPng": true,
+      "isWebp": false,
+      "isJpg": false,
+      "width": 0,
+      "is512x512": false,
+      "is256x256": false,
+      "is192x192": false
+    }
+  ],
+  "id": "POS"
+}
